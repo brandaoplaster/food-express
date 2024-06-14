@@ -1,0 +1,37 @@
+services:
+  food_db:
+    image: "postgres:13"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_PASSWORD=postgres
+    networks:
+      - food_express_net
+
+  food:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: food_express_app
+    command: bin/dev
+    depends_on:
+      - food_db
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/app
+      - gem_cache:/usr/local/bundle
+    env_file:
+      - .env
+    networks:
+      - food_express_net
+
+volumes:
+  postgres_data:
+  gem_cache:
+
+networks:
+  food_express_net:
