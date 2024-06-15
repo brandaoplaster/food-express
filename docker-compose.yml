@@ -17,6 +17,7 @@ services:
       dockerfile: Dockerfile
     container_name: food_express_app
     command: bin/dev
+    tty: true
     depends_on:
       - food_db
     ports:
