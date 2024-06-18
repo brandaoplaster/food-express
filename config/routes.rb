@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   devise_for :admins
 
+  namespace :admin do
+    resources :categories
+  end
+
   authenticated :admin do
     root to: "admin#index", as: :admin_root
   end
