@@ -2,7 +2,8 @@ class Admin::OrdersController < ApplicationController
   before_action :set_order, only: %i[show edit update destroy]
 
   def index
-    @orders = Order.all
+    @unfulfilled_orders = Order.where(fullfiled: false).order(created_at: :asc)
+    @fulfilled_orders = Order.where(fullfiled: true).order(created_at: :asc)
   end
 
   def show; end
