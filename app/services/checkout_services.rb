@@ -1,7 +1,8 @@
 module Admin
-  class DashboardMetricsServices
+  class CheckoutServices
     def initialize(cart)
       @cart = cart
+      Stripe.api_key = Rails.configuration.stripe[:secret_key]
     end
 
     def call
@@ -9,13 +10,13 @@ module Admin
         product = Product.find(item['id'])
         product_stock = product.stocks.find { |ps| ps.size == item['size'] }
 
-        if product_stock.amount < item['quantity'].to_i
-          render json: { error: "Not enough stock for #{product.name} in size #{item['size']}. Only #{product_stock.amount} left." },
-                 status: 400
-        end
+        return false if product_stock.amount < item['quantity'].to_i
+
         build_item(item)
       end
       create_session(items)
+    rescue StandardError => e
+      return false
     end
 
     private
