@@ -56,6 +56,20 @@ gem "stripe", "~> 11.7"
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[mri windows]
+
+  gem "database_cleaner"
+  gem "factory_bot_rails"
+  gem "faker"
+  gem "rspec-rails", "~> 4.1", ">= 4.1.2"
+  gem "shoulda-matchers", "~> 5.0"
+  gem "simplecov", "~> 0.21.2", require: false
+
+  gem "rubocop"
+  gem "rubocop-github", require: false
+  gem "rubocop-performance", require: false
+  gem "rubocop-rails", require: false
+  gem "rubocop-rspec"
+
   gem "ruby-lsp"
   gem "rufo"
 end
