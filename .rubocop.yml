@@ -24,6 +24,10 @@ Layout/IndentationWidth:
 Style/HashSyntax:
   Enabled: false
 
+Style/FrozenStringLiteralComment:
+  Exclude:
+    - "db/**/*"
+
 Style/StringLiterals:
   Description: "Checks if uses of quotes match the configured preference."
   StyleGuide: "#consistent-string-literals"
